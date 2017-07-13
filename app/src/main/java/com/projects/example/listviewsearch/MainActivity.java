@@ -13,14 +13,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    List<Recipe> mRecipeList;
+    RecipeAdapter mRecipeAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        List<Recipe> mRecipeList = new ArrayList<Recipe>();
-        final RecipeAdapter mRecipeAdapter = new RecipeAdapter(this, R.layout.recipe_row_item, mRecipeList);
+        mRecipeList = new ArrayList<Recipe>();
 
         final LinearLayout mSearchView = (LinearLayout) findViewById(R.id.search_view_container);
         final EditText mSearchInput = (EditText) mSearchView.findViewById(R.id.search_input);
@@ -47,12 +48,12 @@ public class MainActivity extends AppCompatActivity {
         Recipe roseLatte = new Recipe(Uri.parse("http://localmilkblog.com/2016/07/cardamom-rose-iced-latte-japanese-ice-coffee.html"), "Cardamom + Rose Iced Latte ", 3.5);
         Recipe vealSaltimbocca = new Recipe(Uri.parse("http://www.foodnetwork.com/recipes/rachael-ray/veal-saltimbocca-recipe-1941547"), "Veal Saltimbocca", 4.0);
 
-
         mRecipeList.add(cherryCobbler);
         mRecipeList.add(beefStroganoff);
         mRecipeList.add(roseLatte);
         mRecipeList.add(vealSaltimbocca);
 
+        mRecipeAdapter = new RecipeAdapter(this, R.layout.recipe_row_item, mRecipeList);
         recipeListView.setAdapter(mRecipeAdapter);
     }
 }
